@@ -23,7 +23,8 @@ pacman::p_load(
       , pROC
       , RWeka
       , caret
-      , xgboost
+      , xgboost,
+      tree
       )
 ```
 
@@ -283,14 +284,23 @@ library(rpart.plot)
 rpart.plot(cart_OJ)
 ```
 
+We can interpret this pretty easily by looking at what determines each split. The percent is the probability of being at that node. and the mm and ch indicate what the data at that node is classified as. 
+
+
 (e) Predict the response on the test data, and produce a confusion matrix comparing the test labels to the predicted test labels. What is the test error rate?
 
 Your code:
 ```{r,echo=TRUE}
 #
-#
-```
+predicted_tree<-predict(cart_OJ,OJ_test,type='class')
 
+#Confusion matrix:
+confuse<-table(OJ_test$Purchase,predicted_tree)
+confuse
+
+
+```
+Test Error Rate:30%
 Your answer:
 
 ~~~
@@ -304,7 +314,8 @@ Please write your answer in full sentences.
 Your code:
 ```{r,echo=TRUE}
 #
-#
+OJ_tree<-tree(Purchase~WeekofPurchase+STORE+PriceDiff,data=OJ_training)
+cv.tree(OJ_tree)
 ```
 
 Your answer:
@@ -333,6 +344,7 @@ Please write your answer in full sentences.
 
 (h) Which tree size corresponds to the lowest cross-validated classification error rate?
 
+7
 Your code:
 ```{r,echo=TRUE}
 #
