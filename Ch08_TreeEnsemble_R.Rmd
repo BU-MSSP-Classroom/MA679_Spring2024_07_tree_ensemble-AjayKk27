@@ -262,6 +262,7 @@ Please write your answer in full sentences.
 
 (c) Type in the name of the tree object in order to get a detailed text output. Pick one of the terminal nodes, and interpret the information displayed.
 
+We can look at node 121, which classifies Purchase as MM. We can see from the splits above how to arrive at that terminal node, i.e week of purchase>247,store<3, 0.31>PriceDiff>=0.015. These tell us what range of values of each of these predictors classify Purchase as MM. We can also see that 29 of the observations at this node are MM while 20 are CH.
 Your code:
 ```{r,echo=TRUE}
 #
@@ -278,7 +279,8 @@ Please write your answer in full sentences.
 
 (d) Create a plot of the tree, and interpret the results.
 ```{r}
-
+library(rpart.plot)
+rpart.plot(cart_OJ)
 ```
 
 (e) Predict the response on the test data, and produce a confusion matrix comparing the test labels to the predicted test labels. What is the test error rate?
